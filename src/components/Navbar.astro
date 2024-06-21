@@ -1,8 +1,122 @@
 ---
 
 ---
-<nav>
-  <a href="/">home</a>
+
+  <!-- <a href="/">home</a>
   <a href="/about">about</a>
-  <a href="/contact">contact</a>
-</nav>
+  <a href="/contact">contact</a> -->
+
+  <nav class="custom-navbar">
+    <div class="brand-logo">
+      <img src="http://salehriaz.com/404Page/img/logo.svg" width="80px" />
+    </div>
+    <div class="navbar-links">
+      <ul>
+        <li><a href="/" target="_blank">Home</a></li>
+        <li><a href="/about" target="_blank">About</a></li>
+        <li><a href="/contact" target="_blank">Contact</a></li>
+        <li><a href="/" class="btn-request" target="_blank">Request A Demo</a></li>
+      </ul>
+    </div>
+  </nav>
+
+<style>
+  /* @import url("https://fonts.googleapis.com/css?family=Dosis:300,400,500"); */
+
+  .spin-earth-on-hover {
+    transition: ease 200s !important;
+    transform: rotate(-3600deg) !important;
+  }
+
+  .custom-navbar {
+    padding-top: 15px;
+    background-color: #423163;
+    padding-bottom: 15px;
+  }
+
+  .brand-logo {
+    margin-left: 25px;
+    margin-top: 5px;
+    display: inline-block;
+  }
+
+  .navbar-links {
+    display: inline-block;
+    float: right;
+    margin-right: 15px;
+    text-transform: uppercase;
+  }
+
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    /*    overflow: hidden;*/
+    display: flex;
+    align-items: center;
+  }
+
+  li {
+    float: left;
+    padding: 0px 15px;
+  }
+
+  li a {
+    display: block;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    letter-spacing: 2px;
+    font-size: 12px;
+
+    -webkit-transition: all 0.3s ease-in;
+    -moz-transition: all 0.3s ease-in;
+    -ms-transition: all 0.3s ease-in;
+    -o-transition: all 0.3s ease-in;
+    transition: all 0.3s ease-in;
+  }
+
+  li a:hover {
+    color: #ffcb39;
+  }
+
+  .btn-request {
+    padding: 10px 25px;
+    border: 1px solid #ffcb39;
+    border-radius: 100px;
+    font-weight: 400;
+  }
+
+  .btn-request:hover {
+    background-color: #ffcb39;
+    color: #fff;
+    transform: scale(1.05);
+    box-shadow: 0px 20px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .objects img {
+    z-index: 90;
+    pointer-events: none;
+  }
+
+  .image-404 {
+    position: relative;
+    z-index: 100;
+    pointer-events: none;
+  }
+
+  @media only screen and (max-width: 600px) {
+    .navbar-links {
+      display: none;
+    }
+
+    .custom-navbar {
+      text-align: center;
+    }
+
+    .brand-logo img {
+      width: 120px;
+    }
+  }
+</style>
+<style></style>
