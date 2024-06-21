@@ -1,0 +1,21 @@
+---
+import Navbar from "../components/Navbar.astro";
+import MainLayout from "../layouts/MainLayout.astro";
+/// server only
+const name = "Asbel jhonatan apaza romero"
+---
+
+<MainLayout title="home" >
+		<h1>{name}</h1>
+
+		<!-- <footer></footer> -->
+
+		<p>Momento actual {new Date().toLocaleTimeString()}</p>
+		<p>Momento actual real <span id="real"></span></p>
+
+		<script>
+			const current = new Date().toLocaleTimeString();
+			const val = document.querySelector('#real') as HTMLElement;
+			val.innerText = `: ${current}`
+		</script>
+</MainLayout >
