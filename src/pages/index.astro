@@ -1,21 +1,29 @@
 ---
-import Navbar from "../components/Navbar.astro";
 import MainLayout from "../layouts/MainLayout.astro";
-/// server only
+import PokeCard from "../components/pokemons/PokeCard.astro";
+import type {  PokeListResponse} from "../interfaces/pokemon.interfaces";
+
+
+const title = "poke"
 const name = "Asbel jhonatan apaza romero"
+
+const resp = await fetch('https://pokeapi.co/api/v2/pokemon')
+const data = await resp.json() as PokeListResponse ;
+if (resp) {
+
+}
 ---
 
-<MainLayout title="home" >
-		<h1>{name}</h1>
+<MainLayout title={title} >
+		<h1 class="text-3xl text-blue-500">{name}</h1>
 
-		<!-- <footer></footer> -->
+		<hr>
 
-		<p>Momento actual {new Date().toLocaleTimeString()}</p>
-		<p>Momento actual real <span id="real"></span></p>
-
-		<script>
-			const current = new Date().toLocaleTimeString();
-			const val = document.querySelector('#real') as HTMLElement;
-			val.innerText = `: ${current}`
-		</script>
+		<section class="grid grid-cols-1 sm:grid-cols-4 md:grid-cols-5 gap-4 mt-2">
+			{
+				data.results.map(poke => {
+					return <PokeCard {...poke}></PokeCard>
+				})
+			}
+		</section>
 </MainLayout >

@@ -1,0 +1,37 @@
+---
+import type { PokeResult } from "../../interfaces/pokemon.interfaces";
+interface Props extends PokeResult {
+  isBig?: boolean;
+}
+
+const { name, url, isBig = false } = Astro.props;
+
+const getUrl = () => {
+  const endpoint = url.split("/");
+  return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${endpoint.at(-2)}.png`;
+};
+
+const id = url.split("/").at(-2);
+---
+
+<a href={`/pokemons/${name}`} class:list={["rounded  flex flex-col justify-center items-center", { border: !isBig }]}>
+  <img
+    transition:name={`${name}-image`}
+    src={getUrl()}
+    alt={name}
+    class:list={[
+      {
+        "w-56 h-56": isBig,
+        "w-24 h-24": !isBig,
+      },
+    ]}
+  />
+  <span
+    class:list={[
+      "capitalize",
+      {
+        "text-4xl text-blue-300": isBig,
+      },
+    ]}>#{id} {name}</span
+  >
+</a>
