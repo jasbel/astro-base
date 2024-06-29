@@ -1,56 +1,52 @@
 ---
 import type { GetStaticPaths } from "astro";
 import MainLayout from "../../layouts/MainLayout.astro";
-import PokeCard from "../../components/pokemons/PokeCard.astro";
-import type { PokeListResponse } from "../../interfaces/pokemon.interfaces";
-import Title from "@components/shared/Title.astro";
+import PokeCard from "@components/pokemons/PokeCard.astro";
+import type { PokeListResponse } from "@interfaces/index.ts";
+  
+// interface Props {
+//   page: PokePage;
+// }
 
 export const getStaticPaths = (async () => {
   const resp = await fetch("https://pokeapi.co/api/v2/pokemon?limit=151");
   const { results } = (await resp.json()) as PokeListResponse;
 
+  return results.map(({name, url}) => {
+    const id = url.split('/').at(-2);
 
-  const maps = results.map((r) => {
     return {
-      params: { name: r.name },
-      props: { name: r.name, url: r.url },
-    };
-  });
-
-  return maps;
+      params: {id: id},
+      props: {name, url}
+    }
+  })
 }) satisfies GetStaticPaths;
 
-const { name } = Astro.params;
-const { url } = Astro.props;
-const id = url.split("/").at(-2);
-const audioSrc = `https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/${id}.ogg`;
-const getUrl = () => {
-  const endpoint = url.split("/");
-  return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${endpoint.at(-2)}.png`;
-};
----
+const title = "Pokemon Static | Home";
 
-<MainLayout title={`Pokemon - #${id} ${name}`} 
-  description={`Informacion sobre el pokemon ${name}`}
-  image={getUrl()}
->
+const { name, url } = Astro.props;
+const { id } = Astro.params;
+const audioSrc = `https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/${id}.ogg`;
+
+---
+<MainLayout title="Algun pokemon">
   <section class="mt-10 mx-10 flex flex-col justify-center items-center">
     <div>
-      <button onclick="window.history.back()"
-      class="text-blue-500">Regresar</button>
-      <Title>{name}</Title>
+      <a href="/">Regresar</a>
+      <h1 class="text-5xl capitalize">{name}</h1>
     </div>
 
     {
-      url && (
         <div>
+          <span>{id}</span>
+          <div>
           <PokeCard name={name!} url={url} isBig />
           <audio controls class="mt-5">
             <source src={audioSrc} type="audio/ogg" />
             Your browser does not support the audio element.
           </audio>
         </div>
-      )
+        </div>
     }
   </section>
 </MainLayout>

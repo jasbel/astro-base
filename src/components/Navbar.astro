@@ -1,24 +1,50 @@
 ---
+const links = [
+  { href: "/", text: "Listado" },
+  { href: "/pokemons/1", text: "Paginado" },
+  { href: "/contact", text: "Contact" },
+  { href: "/about", text: "about" },
+  { href: "/favorites", text: "favorites" },
+];
 
+const curl = Astro.url;
+const path = curl.pathname;
+console.log(curl)
 ---
 
-  <!-- <a href="/">home</a>
-  <a href="/about">about</a>
-  <a href="/contact">contact</a> -->
+<nav class="custom-navbar">
+  <div class="brand-logo">
+    <img src="http://salehriaz.com/404Page/img/logo.svg" width="50px" />
+  </div>
+  <div class="navbar-links">
+    <ul>
+      {
+        links.map((_link) => (
+          <li>
+            <a
+              class:list={["text-gray-800 dark:text-gray-200 hover:text-gray-800 dark:hover:text-gray-200 hover:border-blue-500 mx-1.5 sm:mx-3",
+              
+            ]}
+              href={_link.href}
+              target="_self"
+            >
+              {_link.text}
+            </a>
 
-  <nav class="custom-navbar">
-    <div class="brand-logo">
-      <img src="http://salehriaz.com/404Page/img/logo.svg" width="80px" />
-    </div>
-    <div class="navbar-links">
-      <ul>
-        <li><a href="/" target="_blank">Home</a></li>
-        <li><a href="/about" target="_blank">About</a></li>
-        <li><a href="/contact" target="_blank">Contact</a></li>
-        <li><a href="/" class="btn-request" target="_blank">Request A Demo</a></li>
-      </ul>
-    </div>
-  </nav>
+            {
+              path === _link.href ? (
+              <div transition:name="menu-line" class="border-b-2 border-blue-500 mx-4"/>
+              ):(
+              <div  class="border-b-2 border-transparent"/>
+              )
+            }
+            
+          </li> 
+        ))
+      }
+    </ul>
+  </div>
+</nav>
 
 <style>
   /* @import url("https://fonts.googleapis.com/css?family=Dosis:300,400,500"); */
