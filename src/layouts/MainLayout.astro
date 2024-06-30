@@ -28,17 +28,17 @@ const { title = siteInfo.title, description = siteInfo.descripcion, image } = As
 
     <title>{title}</title>
 
-    <!-- <ViewTransitions /> -->
-    <style>
+    <ViewTransitions />
+    <!-- <style>
       @view-transition {
         navigation: auto;
       }
-    </style>
+    </style> -->
   </head>
-  <body class="bg-slate-500 text-slate-100 m-auto max-w-3xl">
+  <body class="bg-slate-500 text-slate-100 m-auto max-w-3xl flex flex-col min-h-screen">
     <Navbar />
 
-    <main class="mx-4">
+    <main class="mt-10 mx-auto flex-grow w-full max-w-4l px-4">
       <slot />
     </main>
   </body>
