@@ -60,10 +60,7 @@ const getUrl = () => {
 </MainLayout>
 
 <script>
-  interface FavoritePokemon {
-    name: string;
-    id: number;
-  }
+  import type {FavoritePokemon} from '@interfaces/favorites-interfaces';
 
   const handlePoke = () => {
     let favoritePokemons: FavoritePokemon[] = JSON.parse(localStorage.getItem("favorites") ?? "[]");
