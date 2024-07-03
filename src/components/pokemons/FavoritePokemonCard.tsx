@@ -1,5 +1,5 @@
 import type { FavoritePokemon } from "@interfaces/favorites-interfaces";
-import { For, createSignal, type Component } from "solid-js";
+import { For, createSignal, type Component, Show } from "solid-js";
 
 interface Props {
   pokemon: FavoritePokemon;
@@ -16,12 +16,14 @@ export const FavoritePokemonCard: Component<Props> = ({ pokemon }) => {
     const newFavorite = favorites.filter(f => f.id !== pokemon.id);
 
     localStorage.setItem("favorites", JSON.stringify(newFavorite));
+    setVisible(false)
   };
 
   return (
+    <Show when={visible()} >
     <div class="flex flex-col justify-center items-center">
-      <a href={`/pokemon/${pokemon.name}`}>
-        <img src={imgSrc} width={96} height={96} alt={pokemon.name} />
+      <a href={`/pokemons/${pokemon.name}`}>
+        <img src={imgSrc} width={96} height={96} alt={pokemon.name} style={`view-transition-name: ${pokemon.name}-image`} />
         <p class="capitalize">
           #{pokemon.id} {pokemon.name}
         </p>
@@ -31,5 +33,7 @@ export const FavoritePokemonCard: Component<Props> = ({ pokemon }) => {
         Borrar
       </button>
     </div>
+    </Show>
   );
+  
 };
